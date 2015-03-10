@@ -19,15 +19,17 @@ Workflow
 
 Clone the application
 
-    https://github.com/phundament/playground.git
+    git clone https://github.com/phundament/playground.git
+    cp .env-dist .env
     
 Prepare `vendor` folder for development
     
-    docker-compose run web composer install
+    docker-compose run cli composer install
+    docker-compose run cli ./yii app/setup --interactive=0
 
 Start application
 
-	docker-compose up web
+	docker-compose up
 
 
 ### Customize
@@ -95,7 +97,7 @@ Update the *Dependency Injection* configuration `config/giiant.php`.
 
 Generate backend files for example Sakila module
 
-	sh build/crud.sh
+	sh build/crud-sakila.sh
 
 Open [playground.192.168.59.103.xip.io/admin](http://playground.192.168.59.103.xip.io/admin).
 

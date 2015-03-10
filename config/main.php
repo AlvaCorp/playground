@@ -98,7 +98,7 @@ $config = [
             '@dektrium/user/migrations',
             '@app/modules/sakila/migrations',
             //'@app/modules/employees/migrations',
-            '@app/modules/gitlab/migrations',
+            //'@app/modules/gitlab/migrations',
         ]
     ]
 
