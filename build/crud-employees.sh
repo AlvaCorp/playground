@@ -2,7 +2,7 @@
 
 echo "[task] Generating application CRUD in docker container..."
 
-docker-compose run --rm web ./yii giiant-batch \
+docker-compose run --rm cli ./yii giiant-batch \
         --interactive=0 \
         --overwrite=1 \
         --enableI18N=1 \
@@ -14,6 +14,3 @@ docker-compose run --rm web ./yii giiant-batch \
         --crudPathPrefix= \
         --crudProviders=schmunk42\\giiant\\crud\\providers\\DateTimeProvider \
         --tables=employees,departments,dept_manager,dept_emp,titles,salaries
-
-
-        ##

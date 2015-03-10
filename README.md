@@ -69,7 +69,7 @@ Create a module
         --moduleID=employees \
         --moduleClass=app\\modules\\employees\\Module
         
-    mkdir modules/employees/models/search
+    mkdir -p modules/employees/models/search
 	
 Configure it
 
@@ -79,6 +79,7 @@ Migration template
 	
     docker-compose run web ./yii migrate/create --templateFile='@dmstr/db/mysql/templates/file-migration.php' import
 
+Add migration to application params `yii.migration` 
     	    
     docker-compose run web ./yii migrate
 	
@@ -123,6 +124,16 @@ To release this version, tag and push it to your registry
 
 
 ### Deploy
+
+> First time proxy setup
+> 
+>     jwilder/nginx-proxy
+>     80
+>     
+>     Container path	Host path
+>     /tmp/docker.sock	/var/run/docker.sock
+>
+> Select image, publish port 80, define volume. 
 
         
 [Create an initial production stack on tutum](https://dashboard.tutum.co/stack/launch/) by drag&drop uploading [the stack definition file](build/tutum.yml)

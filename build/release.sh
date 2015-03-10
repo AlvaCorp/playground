@@ -9,9 +9,9 @@ pushd `dirname $0`/..
 ./yii app/version
 source .env
 
+sh build/app-assets.sh
 sh build/test.sh
-
-sh build/image.sh
+sh build/images.sh
 
 echo "\n\n[operation] Tagging and pushing images\n"
 # Tag images for tutum and Docker Hub

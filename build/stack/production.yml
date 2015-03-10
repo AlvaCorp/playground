@@ -1,0 +1,61 @@
+# Data only container that includes project source code at /app and generates
+# some configuration files generated based on env vars and composer.json.
+# /app is subsequently used as document root in php-fpm and nginx config
+cli:
+  image: playground:cli
+  links:
+    - db
+  volumes:
+   - /app
+  command: "/app/build/stack/php-cli/run.sh"
+
+# The nginx server for serving static files directly, cached contents via the memcached server and php files via the php-fpm server
+nginx:
+  image: nginx:1.7
+  links:
+    - phpfpm
+  volumes_from:
+    - cli
+  ports:
+    - "80"
+    - "443"
+  environment:
+    VIRTUAL_HOST: ~^prod\.playground\..*
+    NGINX_ERROR_LOG_LEVEL: 'notice'
+  working_dir: '/app'
+  command: "/app/build/stack/nginx/run.sh"
+
+# The php-fpm server for interpreting php code
+phpfpm:
+  image: playground:fpm
+  links:
+    - db
+  volumes_from:
+    - cli
+  ports:
+   - "9000"
+
+# Memcached server for serving cached contents via the nginx-memcache plugin
+memcached:
+  image: memcached:1.4.22
+  ports:
+    - "11211"
+
+# Mailcatcher server for catching outgoing email when not in production
+mailcatcher:
+  image: nisenabe/mailcatcher
+  ports:
+    - "25"
+    - "1080"
+
+db:
+    image: mariadb
+    ports:
+        - "3306"
+    expose:
+        - "3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: secretroot
+        MYSQL_USER: dev
+        MYSQL_PASSWORD: dev123
+        MYSQL_DATABASE: playground-30

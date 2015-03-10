@@ -47,7 +47,9 @@
     "dmstr/yii2-db": "@stable",
     "dmstr/yii2-bootstrap": "@stable",
     "schmunk42/yii2-giiant": "dev-master",
-    "zhuravljov/yii2-datetime-widgets": "@stable"
+    "zhuravljov/yii2-datetime-widgets": "@stable",
+    "neam/docker-php-toolkit": "@dev",
+    "codemix/yii2-streamlog": "0.0.1.*"
   },
   "require-dev": {
     "yiisoft/yii2-apidoc": "2.*",

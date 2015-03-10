@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a32f1b4d8352142ee20d6802f0240ec9",
+    "hash": "7c56ccff96b583ebe55e7f564f15b43a",
     "packages": [
         {
             "name": "bower-asset/admin-lte",
@@ -428,6 +428,45 @@
             "time": "2013-12-10 17:49:58"
         },
         {
+            "name": "codemix/yii2-streamlog",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codemix/yii2-streamlog.git",
+                "reference": "08a5b0716ab07a63d5eb8299db99dc75ea250ef1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codemix/yii2-streamlog/zipball/08a5b0716ab07a63d5eb8299db99dc75ea250ef1",
+                "reference": "08a5b0716ab07a63d5eb8299db99dc75ea250ef1",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "codemix\\streamlog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Härtl",
+                    "email": "haertl.mike@gmail.com"
+                }
+            ],
+            "description": "A Yii 2 log target for streams in URL format",
+            "keywords": [
+                "log",
+                "stdout",
+                "stream",
+                "yii2"
+            ],
+            "time": "2015-03-05 09:58:16"
+        },
+        {
             "name": "dektrium/yii2-user",
             "version": "v0.9.3",
             "source": {
@@ -819,6 +858,61 @@
                 "shell"
             ],
             "time": "2014-11-03 09:44:24"
+        },
+        {
+            "name": "neam/docker-php-toolkit",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/neam/docker-php-toolkit.git",
+                "reference": "d8bfa18b3dfbdb9a6fc314a805321d85febba694"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neam/docker-php-toolkit/zipball/d8bfa18b3dfbdb9a6fc314a805321d85febba694",
+                "reference": "d8bfa18b3dfbdb9a6fc314a805321d85febba694",
+                "shasum": ""
+            },
+            "bin": [
+                "server-config-generator/generate-php-config.sh",
+                "server-config-generator/generate-nginx-config.sh",
+                "server-config-generator/parse-composer-json.sh",
+                "docker-bash.sh",
+                "git-dist-clone.sh",
+                "replace-env-tokens.sh",
+                "run-worker-cmd.sh",
+                "setup-nginx-config.sh",
+                "setup-php-config.sh"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fredrik Wollsén",
+                    "email": "fredrik@neam.se",
+                    "homepage": "http://www.neam.se"
+                },
+                {
+                    "name": "Docker PHP Toolkit Contributors",
+                    "homepage": "https://github.com/neam/docker-php-toolkit/graphs/contributors"
+                },
+                {
+                    "name": "Open Source Community"
+                }
+            ],
+            "description": "Toolkit for maintaining a Docker-based \"one-process-per-container\" PHP-FPM/Nginx stack for 12-factor PHP apps.",
+            "homepage": "https://github.com/neam/docker-php-toolkit",
+            "keywords": [
+                "docker",
+                "local-dev",
+                "nginx",
+                "php",
+                "php-fpm"
+            ],
+            "time": "2015-03-07 18:17:33"
         },
         {
             "name": "phpspec/php-diff",
@@ -2157,7 +2251,8 @@
         "dmstr/yii2-db": 0,
         "dmstr/yii2-bootstrap": 0,
         "schmunk42/yii2-giiant": 20,
-        "zhuravljov/yii2-datetime-widgets": 0
+        "zhuravljov/yii2-datetime-widgets": 0,
+        "neam/docker-php-toolkit": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -33,14 +33,14 @@ $config = [
             // for the mailer to send real emails.
             'useFileTransport' => YII_ENV_PROD ? false : true,
         ],
-        'session'      => [
+        /*'session'      => [
             'class' => 'yii\redis\Session',
             'redis' => [
                 'hostname' => getenv('REDIS_PORT_6379_TCP_ADDR'),
                 'port'     => getenv('REDIS_PORT_6379_TCP_PORT'),
                 'database' => 0,
             ]
-        ],
+        ],*/
         'urlManager'   => [
             'enablePrettyUrl' => getenv('APP_PRETTY_URLS') ? true : false,
             'showScriptName'  => getenv('YII_ENV_TEST') ? true : false,
@@ -71,6 +71,10 @@ $config = [
             'class'  => 'app\modules\employees\Module',
             'layout' => '@admin-views/layouts/main',
         ],*/
+        'gitlab'    => [
+            'class'  => 'app\modules\gitlab\Module',
+            'layout' => '@admin-views/layouts/main',
+        ],
         /*'packaii' => [
             'class'  => \schmunk42\packaii\Module::className(),
             'layout' => '@admin-views/layouts/main',
@@ -94,6 +98,7 @@ $config = [
             '@dektrium/user/migrations',
             '@app/modules/sakila/migrations',
             //'@app/modules/employees/migrations',
+            '@app/modules/gitlab/migrations',
         ]
     ]
 
@@ -102,26 +107,19 @@ $config = [
 
 $web = [
     'components' => [
-        'log'     => [
-            'traceLevel' => getenv('YII_TRACE_LEVEL'),
-            'targets'    => [
-                // log route handled by nginx process
+        'log' => [
+            'targets' => [
                 [
-                    'class'   => 'dmstr\log\SyslogTarget',
-                    'prefix'  => function () {
-                        return '';
-                    },
-                    'levels'  => YII_DEBUG ? ['error', 'warning', 'info'] : ['error', 'warning'],
-                    'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION'],
-                    'enabled' => YII_DEBUG ? true : false,
+                    'class' => 'codemix\streamlog\Target',
+                    'url' => 'php://stderr',
+                    'levels' => ['info','trace'],
+                    'logVars' => [],
                 ],
-                // standard file log route
                 [
-                    'class'   => 'yii\log\FileTarget',
-                    'levels'  => YII_DEBUG ? ['error', 'warning', 'info'] : ['error', 'warning'],
-                    'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION'],
-                    'logFile' => '@app/runtime/logs/web.log',
-                    'dirMode' => 0777
+                    'class' => 'codemix\streamlog\Target',
+                    'url' => 'php://stderr',
+                    'levels' => ['error', 'warning'],
+                    'logVars' => [],
                 ],
             ],
         ],

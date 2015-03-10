@@ -8,11 +8,12 @@ pushd `dirname $0`/..
 ./yii app/version
 source .env
 
-docker-compose -f build/test.yml -p ${APP_ID} up -d testdb
-docker-compose -f build/test.yml -p ${APP_ID} build testweb
-docker-compose -f build/test.yml -p ${APP_ID} up -d testweb
+sh build/images.sh
 
-docker exec ${APP_ID}_testweb_1 codecept build
+#docker-compose -f build/stack/test.yml -p ${APP_ID} build testweb
+#docker-compose -f build/stack/test.yml -p ${APP_ID} up -d testweb
+
+docker-compose -f build/stack/test.yml run testcli codecept build
 
 echo "\nTest stack up, run test suites with:"
 echo "\n  sh build/test.sh\n"

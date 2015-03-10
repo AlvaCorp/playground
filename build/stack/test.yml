@@ -1,19 +1,23 @@
 # Docker compose configuration for local development
 
 # Includes a container to run commands locally - a Dockerized shell
-cli:
-  build: .
+testcli:
+  image: playground:cli
   volumes:
    - .:/app
   links:
-    - db
-  #command: "/app/build/stack/php-cli/run.sh"
+    - testdb:db
+    - testnginx
+  environment:
+    #APP_PRETTY_URLS: 1
+    YII_ENV: test
+  command: "/app/build/stack/php-cli/run.sh"
 
 # The php-fpm server for interpreting php code
-phpfpm:
+testphpfpm:
   image: phundament/php:fpm
   links:
-    - db
+    - testdb:db
   volumes:
    - .:/app
   ports:
@@ -21,14 +25,17 @@ phpfpm:
   working_dir: '/app'
   environment:
     #APP_PRETTY_URLS: 1
-    DB_ENV_MYSQL_DATABASE: playground-20
+    YII_ENV: test
+    YII_DEBUG: true
+    VIRTUAL_HOST: ~^test-playground\..*
+    DB_ENV_MYSQL_DATABASE: test_playground-20
   command: "/app/build/stack/php-fpm/run.sh"
 
 # The nginx server for serving static files directly, cached contents via the memcached server and php files via the php-fpm server
-nginx:
+testnginx:
   image: nginx:1.7
   links:
-    - phpfpm
+    - testphpfpm:phpfpm
   volumes:
    - .:/app
   ports:
@@ -40,7 +47,7 @@ nginx:
   working_dir: '/app'
   command: "/app/build/stack/nginx/run.sh"
 
-db:
+testdb:
     image: mariadb
     ports:
         - "3306"
@@ -53,7 +60,7 @@ db:
         MYSQL_DATABASE: playground-10
 
 # Mailcatcher server for catching outgoing email when not in production
-mailcatcher:
+testmailcatcher:
   image: nisenabe/mailcatcher
   ports:
     - "25"
